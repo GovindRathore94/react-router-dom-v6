@@ -9,17 +9,19 @@ import {
   Route,
 } from "react-router-dom";
 
-// Step : Create Router
+import { Home, About, Posts, Contact, PostDetails, Error } from "./pages";
+import RootLayout from "./Layout/RootLayout";
+// Step 2 : Create Router
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route>
-      <Route path="/" element={<h1>Home Page</h1>} />
-      <Route path="/about" element={<h1>About Page</h1>} />
-      <Route path="/contact" element={<h1>Contact Page</h1>} />
-      <Route path="/product" element={<h1>Products Page</h1>} />
-      <Route path="/post" element={<h1>Posts Page</h1>} />
-      <Route path="*" element={<h1>Error Page</h1>} />
+    <Route path="/" element={<RootLayout />}>
+      <Route index element={<Home />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/posts" element={<Posts />} />
+      <Route path="/posts/:id" element={<PostDetails />} />
+      <Route path="/contact" element={<Contact />} />
+      <Route path="*" element={<Error />} />
     </Route>
   )
 );

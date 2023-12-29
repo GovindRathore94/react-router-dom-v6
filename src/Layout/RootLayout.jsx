@@ -1,12 +1,14 @@
 import React from "react";
 import { Outlet, Link, NavLink } from "react-router-dom";
 import styles from "./RootLayout.module.css";
+import { useAuth } from "../context/AuthProvider";
 
 // active class automatically only Navlink Component ka use karne par hi ayegi,
 
 // call back function se className and styly apply karne ke liye bhi NavLink ka use karana hoga
 
 function RootLayout() {
+  const { isLoggedIn, setIsloggedIn } = useAuth();
   return (
     <div>
       <h1>Navbar</h1>
@@ -41,6 +43,34 @@ function RootLayout() {
               Contact
             </NavLink>
           </li>
+          {/* Login Button  */}
+          {!isLoggedIn && (
+            <li>
+              <NavLink
+                to="login"
+                className={(obj) => {
+                  return obj.isActive ? styles.classByCssModule : null;
+                }}>
+                Login
+              </NavLink>
+            </li>
+          )}
+
+          {/* Logout Button  */}
+          {isLoggedIn && (
+            <li>
+              <NavLink
+                to="login"
+                onClick={() => {
+                  setIsloggedIn(false);
+                }}
+                className={(obj) => {
+                  return obj.isActive ? styles.classByCssModule : null;
+                }}>
+                Logout
+              </NavLink>
+            </li>
+          )}
         </ul>
       </nav>
       <br />

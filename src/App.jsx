@@ -1,4 +1,6 @@
 import "./App.css";
+import RequireAuth from "./component/RequireAuth";
+import AuthProvider from "./context/AuthProvider";
 
 // Step 1 : Import 4 Things createBrowserRouter,createRoutesFromElements, Router, RouterProvider, Route,
 import {
@@ -9,7 +11,15 @@ import {
   Route,
 } from "react-router-dom";
 
-import { Home, About, Posts, Contact, PostDetails, Error } from "./pages";
+import {
+  Home,
+  About,
+  Posts,
+  Contact,
+  PostDetails,
+  Error,
+  Login,
+} from "./pages";
 import RootLayout from "./Layout/RootLayout";
 // Step 2 : Create Router
 
@@ -18,9 +28,17 @@ const router = createBrowserRouter(
     <Route path="/" element={<RootLayout />}>
       <Route index element={<Home />} />
       <Route path="/about" element={<About />} />
-      <Route path="/posts" element={<Posts />} />
+      <Route
+        path="/posts"
+        element={
+          <RequireAuth>
+            <Posts />
+          </RequireAuth>
+        }
+      />
       <Route path="/posts/:id" element={<PostDetails />} />
       <Route path="/contact" element={<Contact />} />
+      <Route path="/login" element={<Login />} />
       <Route path="*" element={<Error />} />
     </Route>
   )
@@ -28,9 +46,9 @@ const router = createBrowserRouter(
 
 function App() {
   return (
-    <div>
+    <AuthProvider>
       <RouterProvider router={router} />
-    </div>
+    </AuthProvider>
   );
 }
 

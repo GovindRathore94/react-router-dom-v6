@@ -3,10 +3,20 @@ import { Link } from "react-router-dom";
 
 function Post({ id, title, body }) {
   return (
-    <div style={{ margin: "1rem", padding: "1rem", background: "lightGrey" }}>
-      <Link to={id.toString()}>
-        <h1>Post: {id}</h1>
-        {/* <h1>{title}</h1> */}
+    <div
+      style={{
+        background: "lightGrey",
+        textAlign: "center",
+        width: "500px",
+        borderRadius: "10px",
+        margin: "10px auto",
+        padding: "0.5rem",
+      }}>
+      <Link
+        style={{ textDecoration: "none", color: "blue" }}
+        to={id.toString()}>
+        <p>Post: {id}</p>
+        <h4>{title}</h4>
       </Link>
     </div>
   );
